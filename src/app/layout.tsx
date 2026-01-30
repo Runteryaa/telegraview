@@ -28,12 +28,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <script type="text/javascript">
-    aclib.runAutoTag({
-        zoneId: 'silgmbd0e0',
-    });
-</script>
-        
       </body>
     </html>
   );
