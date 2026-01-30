@@ -26,31 +26,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Step 1: External Library (Required for both tags) */}
-        <Script 
-          id="aclib" 
-          src="//acscdn.com/script/aclib.js" 
-          strategy="beforeInteractive" 
-        />
+        
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
 
-        {/* Step 2: Combined Zone Tags */}
-        <Script id="adcash-tags" strategy="afterInteractive">
-          {`
-            // Original Tag
-            aclib.runAutoTag({
-                zoneId: 'syn5ljyzrg',
-            });
-
-            // New Tag
-            aclib.runAutoTag({
-                zoneId: 'd6a8pjwedy',
-            });
-          `}
         </Script>
       </body>
     </html>
