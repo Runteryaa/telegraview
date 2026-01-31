@@ -20,8 +20,12 @@ Create a functional viewer for Telegra.ph content with a landing page and a dedi
     -   Fetch data from the API.
     -   Render images in a seamless vertical stack.
     -   Implement "Ad Placeholder" locations.
+    -   **Update**: Ensure ad close buttons are always visible on mobile (< lg screens) and hover-only on desktop.
 4.  **Home Page (`src/app/page.tsx`)**:
     -   Create a dark-themed landing page.
     -   Input field for Telegra.ph URL.
     -   Redirect logic to the viewer page.
 5.  **Styling**: Ensure full-width images, dark mode, and mobile responsiveness using Tailwind CSS.
+
+## Recent Updates
+-   **Ad Visibility**: Updated `src/app/view/page.tsx` to make close buttons for inline ads always visible on mobile devices (screens smaller than 1024px), while retaining hover-to-show behavior on desktop.

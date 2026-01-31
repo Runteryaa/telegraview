@@ -84,7 +84,7 @@ function ViewerContent() {
           <div className="pointer-events-auto relative group">
               <button 
                   onClick={(e) => { e.preventDefault(); setShowLeftAd(false); }}
-                  className="absolute -top-3 -right-3 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 hover:bg-red-700"
+                  className="absolute -top-3 -right-3 bg-red-600 text-white rounded-full p-1 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity z-50 hover:bg-red-700"
                   aria-label="Close Ad"
               >
                 <X size={16} />
@@ -102,7 +102,7 @@ function ViewerContent() {
           <div className="pointer-events-auto relative group">
               <button 
                   onClick={(e) => { e.preventDefault(); setShowRightAd(false); }}
-                  className="absolute -top-3 -right-3 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 hover:bg-red-700"
+                  className="absolute -top-3 -right-3 bg-red-600 text-white rounded-full p-1 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity z-50 hover:bg-red-700"
                   aria-label="Close Ad"
               >
                 <X size={16} />
@@ -146,7 +146,7 @@ function ViewerContent() {
             <div className="pointer-events-auto relative group pt-2 mb-2">
               <button 
                 onClick={(e) => { e.preventDefault(); setShowSettledAd(false); }}
-                className="absolute -top-3 -right-3 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 hover:bg-red-700"
+                className="absolute -top-3 -right-3 bg-red-600 text-white rounded-full p-1 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity z-50 hover:bg-red-700"
                 aria-label="Close Ad"
               >
                 <X size={16} />
@@ -202,7 +202,7 @@ function ViewerContent() {
             <div className="pointer-events-auto relative group">
               <button 
                 onClick={(e) => { e.preventDefault(); setShowSettledAd(false); }}
-                className="absolute -top-3 -right-3 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 hover:bg-red-700"
+                className="absolute -top-3 -right-3 bg-red-600 text-white rounded-full p-1 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity z-50 hover:bg-red-700"
                 aria-label="Close Ad"
               >
                 <X size={16} />
