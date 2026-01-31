@@ -77,7 +77,7 @@ function ViewerContent() {
       
       <main className="max-w-3xl mx-auto bg-black shadow-2xl min-h-screen">
         <div className="p-4 text-center border-b border-gray-800">
-          <h1 className="text-xl font-bold truncate">{data.title}</h1>
+          <h1 className="text-lg sm:text-xl font-bold break-words whitespace-normal">{data.title}</h1>
         </div>
 
         <div className="flex flex-col">
@@ -95,7 +95,7 @@ function ViewerContent() {
               );
             } else if (block.type === 'buttons') {
               return (
-                <div key={index} className="flex w-full">
+                <div key={index} className="flex w-full rounded-md overflow-hidden">
                   {block.items.map((btn, btnIndex) => (
                     <a
                       key={btnIndex}
