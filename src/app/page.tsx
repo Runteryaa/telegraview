@@ -84,7 +84,7 @@ export default function Home() {
             <BookOpen className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-4xl font-extrabold tracking-tight">
-            Webtoon Proxy
+            Telegraph Proxy
           </h1>
           <p className="mt-2 text-gray-400">
             Read Telegra.ph articles in a seamless vertical scroll.

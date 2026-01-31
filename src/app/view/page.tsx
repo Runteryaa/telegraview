@@ -2,7 +2,8 @@
 
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Loader2, AlertCircle, X } from 'lucide-react';
+import { Loader2, AlertCircle, X, Home } from 'lucide-react';
+import Disqus from './Disqus';
 
 function ViewerContent() {
   const searchParams = useSearchParams();
@@ -16,6 +17,31 @@ function ViewerContent() {
   const [showRightAd, setShowRightAd] = useState(true);
   const [showBottomAd, setShowBottomAd] = useState(true);
   const [showSettledAd, setShowSettledAd] = useState(true);
+
+  const [shortenedUrl, setShortenedUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!q) {
+      setShortenedUrl(null);
+      return;
+    }
+
+    const shortenUrl = async () => {
+      try {
+        const res = await fetch(`/api/shorten?url=${encodeURIComponent(q)}`);
+        if (res.ok) {
+          const json = await res.json();
+          if (json.shortenedUrl) {
+            setShortenedUrl(json.shortenedUrl);
+          }
+        }
+      } catch (err) {
+        console.error('Failed to shorten URL:', err);
+      }
+    };
+
+    shortenUrl();
+  }, [q]);
 
   useEffect(() => {
     if (!q) {
@@ -108,7 +134,7 @@ function ViewerContent() {
                 <X size={16} />
               </button>
               <a href="/api/ad/click?url=https%3A%2F%2Fexe.io%2Fref%2Frunterya" target="_blank" rel="noopener noreferrer">
-                  <img src="/api/ad/image?url=https%3A%2F%2Fexe.io%2Fimg%2Fref%2Fr6.png" title="CuT URLs - Earn money by shortening links with the highest CPMs Ever!" alt="Ad" className="w-full rounded-md shadow-lg" />
+                  <img src="/api/ad/image?url=https%3A%2F%2Fexe.io%2Fimg%2Fref%2Fr3.gif" title="CuT URLs - Earn money by shortening links with the highest CPMs Ever!" alt="Ad" className="w-full rounded-md shadow-lg" />
               </a>
           </div>
         </div>
@@ -136,8 +162,13 @@ function ViewerContent() {
       )}
 
       <main className="max-w-3xl mx-auto bg-black shadow-2xl min-h-screen">
-        <div className="p-4 pb-2 text-center border-b border-gray-800">
-          <h1 className="text-lg sm:text-xl font-bold break-words whitespace-normal">{data.title}</h1>
+        <div className="relative p-4 pb-2 text-center border-b border-gray-800 flex items-center justify-center">
+          <a href="/" className="absolute left-4 text-gray-400 hover:text-white transition-colors" aria-label="Go Home">
+            <Home size={24} />
+          </a>
+          <a href={shortenedUrl || q} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-blue-400 transition-colors">
+            <h1 className="text-lg sm:text-xl font-bold break-words whitespace-normal">{data.title}</h1>
+          </a>
         </div>
 
         <div className="flex flex-col items-center">
@@ -152,7 +183,7 @@ function ViewerContent() {
                 <X size={16} />
               </button>
                 <a href="/api/ad/click?url=https%3A%2F%2Fexe.io%2Fref%2Frunterya" target="_blank" rel="noopener noreferrer">
-                  <img src="/api/ad/image?url=https%3A%2F%2Fexe.io%2Fimg%2Fref%2Fr4.png" title="CuT URLs - Earn money by shortening links with the highest CPMs Ever!" alt="Ad" className="w-full rounded-md shadow-lg" />
+                  <img src="/api/ad/image?url=https%3A%2F%2Fexe.io%2Fimg%2Fref%2Fr1.gif" title="CuT URLs - Earn money by shortening links with the highest CPMs Ever!" alt="Ad" className="w-full rounded-md shadow-lg" />
                 </a>
             </div>
           )}
@@ -212,6 +243,12 @@ function ViewerContent() {
                 </a>
             </div>
           )}
+
+          <Disqus 
+            url={`https://telegraview.vercel.app/view?q=${encodeURIComponent(q)}`} 
+            identifier={q} 
+            title={data.title} 
+          />
 
         </div>
       </main>
