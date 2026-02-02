@@ -14,6 +14,7 @@ Create a functional viewer for Telegra.ph content with a landing page and a dedi
     -   Create a GET endpoint that accepts a `url` query parameter.
     -   Fetch and parse the Telegra.ph page.
     -   Extract the title and image URLs (fixing relative paths).
+    -   **New Feature**: Parse `{imglink}` patterns in text nodes. If a paragraph consists solely of links enclosed in curly braces (e.g., `{https://example.com/img.jpg}`), convert them into image elements.
     -   Return JSON data.
 3.  **API Route (`src/app/api/shorten/route.ts`)**:
     -   Create a GET endpoint to shorten URLs using the `exe.io` API.
@@ -35,6 +36,7 @@ Create a functional viewer for Telegra.ph content with a landing page and a dedi
 6.  **Styling**: Ensure full-width images, dark mode, and mobile responsiveness using Tailwind CSS.
 
 ## Recent Updates
+-   **Content Parsing**: Updated `src/app/api/read/route.ts` to detect text patterns like `{https://image.url}` within paragraphs. These are now extracted and rendered as images instead of text.
 -   **Comments**: Refactored the Disqus component to use the `disqus-react` library for better stability and feature support. A placeholder shortname `telegraph-viewer-demo` is used; the user should update this in `src/app/view/Disqus.tsx`.
 -   **Monetization**: Added integration with `exe.io` to shorten the original article URL.
 -   **Navigation & Links**: Updated `src/app/view/page.tsx` to include a "Home" button in the header.

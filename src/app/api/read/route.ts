@@ -60,10 +60,39 @@ export async function GET(request: Request) {
       // Case 2: Paragraphs and other text blocks
       if (['p', 'h3', 'h4', 'blockquote', 'aside', 'ul', 'ol'].includes(tagName)) {
         const textContent = el.text().trim();
-        
-        // Sub-Case 2a: Markdown-style Button Row
-        const markdownLinkRegex = /\[([^\]]+)\]\s*\(([^)]+)\)/g;
         const invisibleCharRegex = /[\s\u200B-\u200D\uFEFF]/g;
+        
+        // Sub-Case 2a: Image Link Pattern {url}
+        const braceRegex = /\{([^\}]+)\}/g;
+        const remainingAfterBraces = textContent.replace(braceRegex, '').replace(invisibleCharRegex, '');
+
+        if (remainingAfterBraces.length === 0) {
+            const matches = [...textContent.matchAll(braceRegex)];
+            if (matches.length > 0) {
+                const imagesToAdd: { type: 'image'; src: string }[] = [];
+                let allLinksValid = true;
+
+                for (const match of matches) {
+                    const rawUrl = match[1].trim();
+                    // Check if it looks like a link
+                    if (rawUrl.startsWith('http') || rawUrl.startsWith('/')) {
+                        const src = resolveUrl(rawUrl);
+                        if (src) imagesToAdd.push({ type: 'image', src });
+                    } else {
+                        allLinksValid = false;
+                        break;
+                    }
+                }
+
+                if (allLinksValid && imagesToAdd.length > 0) {
+                    imagesToAdd.forEach(img => content.push(img));
+                    return;
+                }
+            }
+        }
+
+        // Sub-Case 2b: Markdown-style Button Row
+        const markdownLinkRegex = /\[([^\]]+)\]\s*\(([^)]+)\)/g;
         const remainingAfterMarkdown = textContent.replace(markdownLinkRegex, '').replace(invisibleCharRegex, '');
         
         const isMarkdownMatch = textContent.match(markdownLinkRegex);
@@ -85,7 +114,7 @@ export async function GET(request: Request) {
           }
         }
 
-        // Sub-Case 2b: Standard Text Block (Fallback)
+        // Sub-Case 2c: Standard Text Block (Fallback)
         const contentClone = el.clone();
         contentClone.find('img').each((_, img) => {
             const $img = $(img);
