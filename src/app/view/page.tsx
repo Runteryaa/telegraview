@@ -16,7 +16,6 @@ function ViewerContent() {
   const [showLeftAd, setShowLeftAd] = useState(true);
   const [showRightAd, setShowRightAd] = useState(true);
   const [showBottomAd, setShowBottomAd] = useState(true);
-  const [showSettledAd, setShowSettledAd] = useState(true);
 
   const [shortenedUrl, setShortenedUrl] = useState<string | null>(null);
 
@@ -173,22 +172,6 @@ function ViewerContent() {
 
         <div className="flex flex-col items-center">
           
-          {showSettledAd && (
-            <div className="pointer-events-auto relative group pt-2 mb-2">
-              <button 
-                onClick={(e) => { e.preventDefault(); setShowSettledAd(false); }}
-                className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity z-50 hover:bg-red-700"
-                aria-label="Close Ad"
-              >
-                <X size={16} />
-              </button>
-                <a href="/api/ad/click?url=https%3A%2F%2Fexe.io%2Fref%2Frunterya" target="_blank" rel="noopener noreferrer">
-                  <img src="/api/ad/image?url=https%3A%2F%2Fexe.io%2Fimg%2Fref%2Fr1.gif" title="CuT URLs - Earn money by shortening links with the highest CPMs Ever!" alt="Ad" className="w-full rounded-md shadow-lg" />
-                </a>
-            </div>
-          )}
-
-
           {data.content.map((block, index) => {
             if (block.type === 'image') {
               return (
@@ -229,41 +212,11 @@ function ViewerContent() {
             return null;
           })}
 
-          {showSettledAd && (
-            <div className="pointer-events-auto relative group">
-              <button 
-                onClick={(e) => { e.preventDefault(); setShowSettledAd(false); }}
-                className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity z-50 hover:bg-red-700"
-                aria-label="Close Ad"
-              >
-                <X size={16} />
-              </button>
-                <a href="/api/ad/click?url=https%3A%2F%2Fexe.io%2Fref%2Frunterya" target="_blank" rel="noopener noreferrer">
-                  <img src="/api/ad/image?url=https%3A%2F%2Fexe.io%2Fimg%2Fref%2Fr4.png" title="CuT URLs - Earn money by shortening links with the highest CPMs Ever!" alt="Ad" className="w-full rounded-md shadow-lg" />
-                </a>
-            </div>
-          )}
-
           <Disqus 
             url={`https://telegraview.vercel.app/view?q=${encodeURIComponent(q)}`} 
             identifier={q} 
             title={data.title} 
           />
-
-          {showSettledAd && (
-            <div className="pointer-events-auto relative group">
-              <button 
-                onClick={(e) => { e.preventDefault(); setShowSettledAd(false); }}
-                className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity z-50 hover:bg-red-700"
-                aria-label="Close Ad"
-              >
-                <X size={16} />
-              </button>
-                <a href="/api/ad/click?url=https%3A%2F%2Fexe.io%2Fref%2Frunterya" target="_blank" rel="noopener noreferrer">
-                  <img src="/api/ad/image?url=https%3A%2F%2Fexe.io%2Fimg%2Fref%2Fr4.png" title="CuT URLs - Earn money by shortening links with the highest CPMs Ever!" alt="Ad" className="w-full rounded-md shadow-lg" />
-                </a>
-            </div>
-          )}
 
         </div>
       </main>
