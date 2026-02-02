@@ -21,8 +21,62 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
-      {/* Ads remain the same... */}
-      {/* [Left Ad, Right Ad, and Bottom Ad blocks remain here] */}
+
+      {showLeftAd && (
+        <div className="fixed top-0 left-4 bottom-0 w-40 hidden xl:flex flex-col items-center justify-center pointer-events-none">
+          <div className="pointer-events-auto relative group">
+              <button 
+                  onClick={(e) => { e.preventDefault(); setShowLeftAd(false); }}
+                  className="absolute -top-3 -right-3 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 hover:bg-red-700"
+                  aria-label="Close Ad"
+              >
+                <X size={16} />
+              </button>
+              <a href="/api/ad/click?url=https%3A%2F%2Fexe.io%2Fref%2Frunterya" target="_blank" rel="noopener noreferrer">
+                  <img src="/api/ad/image?url=https%3A%2F%2Fexe.io%2Fimg%2Fref%2Fr6.png" title="CuT URLs - Earn money by shortening links with the highest CPMs Ever!" alt="Ad" className="w-full rounded-md shadow-lg" />
+              </a>
+          </div>
+        </div>
+      )}
+
+      {/* Sidebar Ad: Right */}
+      {showRightAd && (
+        <div className="fixed top-0 right-4 bottom-0 w-40 hidden xl:flex flex-col items-center justify-center pointer-events-none">
+          <div className="pointer-events-auto relative group">
+              <button 
+                  onClick={(e) => { e.preventDefault(); setShowRightAd(false); }}
+                  className="absolute -top-3 -right-3 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 hover:bg-red-700"
+                  aria-label="Close Ad"
+              >
+                <X size={16} />
+              </button>
+              <a href="/api/ad/click?url=https%3A%2F%2Fexe.io%2Fref%2Frunterya" target="_blank" rel="noopener noreferrer">
+                  <img src="/api/ad/image?url=https%3A%2F%2Fexe.io%2Fimg%2Fref%2Fr6.png" title="CuT URLs - Earn money by shortening links with the highest CPMs Ever!" alt="Ad" className="w-full rounded-md shadow-lg" />
+              </a>
+          </div>
+        </div>
+      )}
+
+      {/* Sticky Bottom Banner (Mobile/Tablet) */}
+      {showBottomAd && (
+        <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center items-center bg-black/90 backdrop-blur border-t border-gray-800 p-2 xl:hidden">
+          <button 
+              onClick={(e) => { e.preventDefault(); setShowBottomAd(false); }}
+              className="absolute -top-3 right-2 bg-red-600 text-white rounded-full p-1 shadow-md z-50 hover:bg-red-700"
+              aria-label="Close Ad"
+          >
+            <X size={20} />
+          </button>
+          <a href="/api/ad/click?url=https%3A%2F%2Fexe.io%2Fref%2Frunterya" target="_blank" rel="noopener noreferrer" className="block w-full max-w-[728px]">
+              <img 
+                src="/api/ad/image?url=https%3A%2F%2Fexe.io%2Fimg%2Fref%2Fr4.png" 
+                title="CuT URLs - Earn money by shortening links with the highest CPMs Ever!" 
+                alt="Ad" 
+                className="w-full h-auto rounded-md shadow-lg" 
+              />
+          </a>
+        </div>
+      )}
 
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
@@ -61,7 +115,7 @@ export default function Home() {
         </div>
 
         {/* --- RECOMMENDED USERSCRIPTS SECTION --- */}
-        <div className="mt-10 pt-6">
+        <div className="pt-6">
           <div className="grid gap-3">
             <a 
               href="https://greasyfork.org/en/scripts/564741-openin-telegraview"
